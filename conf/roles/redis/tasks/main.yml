@@ -1,0 +1,28 @@
+---
+- name: Extract Redis
+  unarchive:
+    src: /opt/repo/redis-4.0.1-compiled.tar.gz
+    copy: true
+    dest: /opt/
+- name: Create Link
+  file:
+    src: /opt/redis-4.0.1
+    dest: /opt/redis
+    state: link
+- name: Distribute run
+  copy:
+    src: ../files/run.sh
+    dest: /opt/redis/run.sh
+    mode: 0744
+- name: Distribute Master Conf
+  copy:
+    src: ../files/redis_master.conf
+    dest: /opt/redis/redis_master.conf
+- name: Distribute Slave Conf
+  copy:
+    src: ../files/redis_slave.conf
+    dest: /opt/redis/redis_slave.conf
+- name: Distribute Cluster Conf
+  copy:
+    src: ../files/redis_cluster.conf
+    dest: /opt/redis/redis_cluster.conf

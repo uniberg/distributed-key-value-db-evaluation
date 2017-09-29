@@ -1,0 +1,14 @@
+---
+- name: Install openjdk
+  apt:
+    name: openjdk-8-jdk
+    state: latest
+- name: Install maven
+  apt:
+    name: maven
+    state: latest
+#- name: Git
+#  git:
+#    repo: ssh://git@git.uniberg.com/marius.gerling/session-db-evaluator.git
+#    dest: /home/ubuntu/session-db-evaluator
+#    accept_hostkey: true

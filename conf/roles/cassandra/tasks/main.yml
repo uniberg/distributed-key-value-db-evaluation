@@ -1,0 +1,38 @@
+---
+- name: Extract Cassandra
+  unarchive:
+    src: /opt/repo/apache-cassandra-3.11.0-bin.tar.gz
+    copy: true
+    dest: /opt/
+- name: Create Link
+  file:
+    src: /opt/apache-cassandra-3.11.0
+    dest: /opt/cassandra
+    state: link
+- name: Install JRE
+  apt:
+    name: openjdk-8-jre
+    state: latest
+- name: Create User cassandra
+  user:
+    name: cassandra
+    shell: /bin/bash
+#- name: Distribute run
+#  copy:
+#    src: ../files/run.sh
+#    dest: /opt/cassandra/run.sh
+#    mode: 0744
+- name: Distribute Config
+  copy:
+    src: ../files/conf/
+    dest: /opt/cassandra/conf/
+- name: Distribute Bin
+  copy:
+    src: ../files/bin/
+    dest: /opt/cassandra/bin/
+- name: Set Cassandra Permissions
+  file:
+    path: /opt/apache-cassandra-3.11.0
+    owner: cassandra
+    recurse: yes
+

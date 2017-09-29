@@ -1,0 +1,46 @@
+---
+- name: Install Docker
+  apt:
+    name: docker.io
+    state: latest
+- name: Create folder
+  file:
+    name: /opt/couchbase
+    state: directory
+    mode: 0755
+    owner: root
+    group: root
+#- name: Create User cassandra
+#  user:
+#    name: cassandra
+#    shell: /bin/bash
+#- name: Create Link
+#  file:
+#    src: /opt/apache-cassandra-3.11.0
+#    dest: /opt/cassandra
+#    state: link
+#- name: Distribute run
+#  copy:
+#    src: ../files/run.sh
+#    dest: /opt/cassandra/run.sh
+#    mode: 0744
+#- name: Distribute Config
+#  copy:
+#    src: ../files/riak.conf
+#    dest: /etc/riak/riak.conf
+#- name: Replace IP
+#  replace:
+#    dest: /etc/riak/riak.conf
+#    regexp: '##ip##'
+#    replace: "{{ ansible_ens3.ipv4.address }}"
+#    replace: "{{ ansible_hostname }}"
+#- name: Distribute Bin
+#  copy:
+#    src: ../files/bin/
+#    dest: /opt/cassandra/bin/
+#- name: Set Cassandra Permissions
+#  file:
+#    path: /opt/apache-cassandra-3.11.0
+#    owner: cassandra
+#    recurse: yes
+
