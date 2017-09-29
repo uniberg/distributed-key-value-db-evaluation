@@ -1,0 +1,38 @@
+---
+- hosts: all
+  roles:
+  - role: common
+    become: yes
+    become_user: root
+- hosts: mgmt load
+  roles:
+  - role: filerepo
+    become: yes
+    become_user: root
+  - role: prometheus
+    become: yes
+    become_user: root
+- hosts: all
+  roles:
+  - role: prometheus-node-exporter
+    become: yes
+    become_user: root
+- hosts: database
+  roles:
+  - role: redis
+    become: yes
+    become_user: root
+  - role: cassandra
+    become: yes
+    become_user: root
+  - role: riak
+    become: yes
+    become_user: root
+  - role: couchbase
+    become: yes
+    become_user: root
+- hosts: load
+  roles:
+  - role: load
+  become: yes
+  become_user: root

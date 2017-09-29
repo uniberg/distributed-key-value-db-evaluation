@@ -1,0 +1,16 @@
+[database]
+pp1dc1-1
+pp1dc1-2
+pp1dc1-3
+pp1dc2-1
+pp1dc2-2
+pp1dc2-3
+
+[management]
+mgmt
+
+[load]
+pp1load-1
+pp1load-2
+pp1load-3
+pp1load-4

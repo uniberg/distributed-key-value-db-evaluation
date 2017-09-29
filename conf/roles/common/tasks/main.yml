@@ -1,0 +1,56 @@
+---
+- name: Update and upgrade repositories
+  apt:
+    update_cache: yes
+    upgrade: dist
+- name: Install python
+  apt:
+    name: python
+    state: latest
+- name: Install htop
+  apt:
+    name: htop
+    state: latest
+- name: Install tmux
+  apt:
+    name: tmux
+    state: latest
+- name: Install dstat
+  apt:
+    name: dstat
+    state: latest
+- name: Install iperf3
+  apt:
+    name: iperf3
+    state: latest
+- name: Install sysstat
+  apt:
+    name: sysstat
+    state: latest
+- name: Install make
+  apt:
+    name: make
+    state: latest
+- name: Install gcc
+  apt:
+    name: gcc
+    state: latest
+- name: Distribute /etc/hosts
+  copy:
+    src: ../files/hosts
+    dest: /etc/hosts
+- name: Distribute networkskript
+  copy:
+    src: ../files/netconf.sh
+    dest: /opt/netconf.sh
+    mode: 0744
+- name: Execute networkskript
+  shell: /opt/netconf.sh
+- name: Distribute limits.conf
+  copy:
+    src: ../files/limits.conf
+    dest: /etc/security/limits.conf
+- name: Distribute profile
+  copy:
+    src: ../files/profile
+    dest: /etc/profile
