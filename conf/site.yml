@@ -4,12 +4,20 @@
   - role: common
     become: yes
     become_user: root
-- hosts: mgmt load
+- hosts: mgmt
   roles:
   - role: filerepo
     become: yes
     become_user: root
   - role: prometheus
+    become: yes
+    become_user: root
+  - role: grafana
+    become: yes
+    become_user: root
+- hosts: mgmt load
+  roles:
+  - role: prometheus-pushgateway
     become: yes
     become_user: root
 - hosts: all
@@ -23,9 +31,6 @@
     become: yes
     become_user: root
   - role: cassandra
-    become: yes
-    become_user: root
-  - role: riak
     become: yes
     become_user: root
   - role: couchbase

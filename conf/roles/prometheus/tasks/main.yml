@@ -1,4 +1,7 @@
 ---
+- name: Create Prometheus User
+  user:
+    name: prometheus
 - name: Extract Prometheus
   unarchive:
     src: /opt/repo/prometheus-1.7.1.linux-amd64.tar.gz
@@ -8,37 +11,24 @@
     src: /opt/prometheus-1.7.1.linux-amd64
     dest: /opt/prometheus 
     state: link
-- name: Extract Prometheus Pushgateway
-  unarchive:
-    src: /opt/repo/pushgateway-0.4.0.linux-amd64.tar.gz
-    dest: /opt/
-- name: Create Link
-  file:
-    src: /opt/pushgateway-0.4.0.linux-amd64
-    dest: /opt/pushgateway
-    state: link
 - name: Configure
   copy:
     src: ../files/prometheus.yml
     dest: /opt/prometheus/prometheus.yml
-- name: Grafana
-  unarchive:
-    src: /opt/repo/grafana-4.4.1.linux-x64.tar.gz
-    dest: /opt/
-- name: Create Link
+- name: Set Owner and Permissions
   file:
-    src: /opt/grafana-4.4.1
-    dest: /opt/grafana
-    state: link
-- name: Data Path
-  file:
-    path: /var/lib/grafana
+    path: /opt/prometheus-1.7.1.linux-amd64
+    owner: prometheus
+    group: prometheus
+    recurse: yes
     state: directory
-- name: Log Path
-  file:
-    path: /var/log/grafana
-    state: directory
-- name: Plugin Path
-  file:
-    path: /var/lib/grafana/plugins
-    state: directory
+- name: Create the service
+  copy:
+    src: ../files/prometheus.service
+    dest: /usr/lib/systemd/system/prometheus.service
+- name: Activate Service
+  systemd:
+    name: prometheus
+    state: restarted
+    enabled: yes
+    daemon_reload: yes
