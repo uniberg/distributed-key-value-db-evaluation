@@ -1,0 +1,30 @@
+---
+- name: Create Prometheus User
+  user:
+    name: prometheus
+- name: Extract Prometheus Pushgateway
+  unarchive:
+    src: /opt/repo/pushgateway-0.4.0.linux-amd64.tar.gz
+    dest: /opt/
+- name: Create Link
+  file:
+    src: /opt/pushgateway-0.4.0.linux-amd64
+    dest: /opt/pushgateway
+    state: link
+- name: Set Owner and Permissions
+  file:
+    path: /opt/pushgateway-0.4.0.linux-amd64
+    owner: prometheus
+    group: prometheus
+    recurse: yes
+    state: directory
+- name: Create the service
+  copy:
+    src: ../files/pushgateway.service
+    dest: /usr/lib/systemd/system/pushgateway.service
+- name: Activate Service
+  systemd:
+    name: pushgateway
+    state: restarted
+    enabled: yes
+    daemon_reload: yes

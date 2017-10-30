@@ -1,0 +1,15 @@
+# -*- mode: conf -*-
+
+[Unit]
+Description=Prometheus Pushgateway
+Documentation=https://prometheus.io
+After=network.target
+
+[Service]
+User=prometheus
+WorkingDirectory=/opt/pushgateway
+ExecStart=/opt/pushgateway/pushgateway
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
