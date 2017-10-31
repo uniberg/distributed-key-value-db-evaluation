@@ -1,12 +1,10 @@
-Ansible Repository for Session DB Evaluator
-===========================================
+# Ansible Repository for Session DB Evaluator
 
 This repository contains the ansible Playbooks for the Session DB Evaluator. Everything is configured to run with Ubuntu 16.04 LTS.
 
-Setup
------
+## Setup
 
-###Every Host
+### Every Host
 
 Ensure that every host has Python installed since it is a requirement to let that host be configured by ansible
 
@@ -14,7 +12,7 @@ Ensure that every host has Python installed since it is a requirement to let tha
 sudo apt install python -y
 ```
 
-###Management Host / Config Server
+### Management Host / Config Server
 
 Install ansible on the config server and link the hosts file.
 
@@ -24,10 +22,9 @@ sudo apt install ansible -y
 sudo ln -s $FULL_PATH_TO_HOST_FILE /etc/ansible/hosts
 ```
 
-Execute
--------
+## Execute
 
-To configure the hosts just execute the following:
+To configure the hosts just execute the following command while being in this folder.
 
 ```bash
 ansible-playbook site.yml
